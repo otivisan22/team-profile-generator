@@ -66,18 +66,29 @@ const managerQuestion = [
     type: "input",
     name: "officeNumber",
     message: "What's the manager office number?",
-    validate: 
+    validate: nameInput =>
+    {
+      if(isNaN(nameInput)){
+      return false;
+      }else {
+        console.log ("Please provide the office number");
+        return true;
+      }
+    }
   },
   )];
 ];
 
 //Engineer question
 const engineerQuestion = [
+  return inquirer.prompt([
   {
     type: "input",
     name: "username",
     message: "What's the github user of the engineer office?",
+    validate: 
   },
+  )];
 ];
 
 //Intern question
