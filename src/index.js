@@ -6,7 +6,7 @@ const inquirer = require("inquirer");
 
 //Questions
 
-const questions = [
+const questions = () => {
   return inquirer.prompt([
   {
     type: "input",
@@ -57,10 +57,10 @@ valid = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>(
     choices: ["manager", "intern", "engineer"],
   },
   )];
-];
+  };
 
 // Manager question
-const managerQuestion = [
+const managerQuestion = () => {
   return inquirer.prompt([
   {
     type: "input",
@@ -77,10 +77,10 @@ const managerQuestion = [
     }
   },
   )];
-];
+};
 
 //Engineer question
-const engineerQuestion = [
+const engineerQuestion = () => {
   return inquirer.prompt([
   {
     type: "input",
@@ -89,32 +89,30 @@ const engineerQuestion = [
     validate: 
   },
   )];
-];
+};
 
 //Intern question
-const internQuestion = [
+const internQuestion = () =>{
+  return inquirer.prompt ([
   {
     type: "input",
     name: "name",
     message: "What's the school name of the intern?",
   },
-];
+  )];
+};
 
 //In the case you need to add another employee
-const anotherQuestion = [
+const anotherQuestion = () =>{
+return inquirer.prompt ([
   {
     type: "list",
     name: "name",
     message: "Would you like to add another employee?",
     choices: ["Yes", "No"],
   },
-];
+)];
+};
 
 //Create a function to blend together the data
-
 //Create a function to initialize the app
-async () => {
-  const answers = await inquirer.prompt(questions).then(function(response));
-  return employeeAnswers = response;
-
-};
