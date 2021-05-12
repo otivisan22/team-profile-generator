@@ -1,7 +1,7 @@
 //Include packages needed for this application
-const manager = require("./lib/classes/manager");
-const engineer = require("./lib/classes/engineer");
-const intern = require("./lib/classes/intern");
+const manager = require("./lib/manager");
+const engineer = require("./lib/engineer");
+const intern = require("./lib/intern");
 const inquirer = require("inquirer");
 
 //Questions
