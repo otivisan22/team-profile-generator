@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "node index.js",
-    "test": "jest--verbose"
+    "test": "jest --verbose"
   },
   "author": "",
   "license": "ISC",
