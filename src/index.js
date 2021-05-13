@@ -4,6 +4,10 @@ const engineer = require("./lib/engineer");
 const intern = require("./lib/intern");
 const inquirer = require("inquirer");
 
+function init = () =>{
+ questions();
+ 
+}
 //Questions
 
 const questions = () => {

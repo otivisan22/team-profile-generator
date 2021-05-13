@@ -2,10 +2,16 @@ const Intern = require("../lib/intern");
 
 describe("Intern", () => {
   describe("constructor tests", () => {
-    test("should construct intern object with name, id, email, github and school", () => {
-      const intern = new Intern("Sam", 222, "sam22@gmail.com","https://github.com/samken22","Stavanger");
+    test("should construct intern object with name, id, email, github,school and role", () => {
+      const intern = new Intern(
+        "Sam",
+        222,
+        "sam22@gmail.com",
+        "https://github.com/samken22",
+        "Stavanger"
+      );
       expect(intern).toEqual({
-        role: "Employee",
+        role: "Intern",
         name: "Sam",
         id: 222,
         email: "sam22@gmail.com",
@@ -24,6 +30,17 @@ describe("Intern", () => {
         "https://github.com/samken22",
         "Stavanger"
       );
-
       expect(intern.getRole()).toEqual("Intern");
     });
+  });
+  test("should return school when getSchool is called", () => {
+    const intern = new Intern(
+      "Sam",
+      222,
+      "sam22@gmail.com",
+      "https://github.com/samken22",
+      "Stavanger"
+    );
+    expect(intern.getSchool()).toEqual("Stavanger");
+  });
+});
