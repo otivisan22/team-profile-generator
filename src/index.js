@@ -3,6 +3,7 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const inquirer = require("inquirer");
+const generateHTML = require("./lib/generateHTML")
 
 const employees = [];
 
@@ -22,22 +23,28 @@ const init = async () => {
         ]
       },
     ]
+    const { employeeType } = await inquirer.prompt(employeeQuestions)
+    if (employeeType === none) {
+      isTeam = true;
+      console.log(employees);
+    } else {
+      if (employeeType === engineer)
+        await addEngineer();
+    }
+    if (employeeType === intern) {
+      await addIntern();
+  
+    };
+     //create generateHTML function 
+  const HTML = generateHTML(employees);
+  fs.writeFileSync("teamprofile.html",HTML,(err) =>{
+    if (err) {
+      console.log(err);
+    }else{
+      console.log("HTML file created");
+    }
+  });
   };
-  const { employeeType } = await inquirer.prompt(employeeQuestions)
-  if (employeeType === none) {
-    isTeam = true;
-    console.log(employees);
-  } else {
-    if (employeeType === engineer)
-      await addEngineer();
-  }
-  if (employeeType === intern) {
-    await addIntern();
-
-  };
-
-
-  //create generateHTML function 
 
   const addManager = async () => {
     const managerQuestions = [
