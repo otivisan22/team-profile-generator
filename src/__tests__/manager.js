@@ -38,7 +38,7 @@ describe("Manager", () => {
   });
 
   test("should return officeNumber when getOfficeNumber is called", () => {
-    const intern = new Intern(
+    const manager = new Manager(
       "Sam",
       222,
       "sam22@gmail.com",
@@ -46,6 +46,6 @@ describe("Manager", () => {
       "Stavanger"
       "2222222"
     );
-    expect(intern.getOfficeNumber()).toEqual("2222222");
+    expect(manager.getOfficeNumber()).toEqual("2222222");
   });
 });
