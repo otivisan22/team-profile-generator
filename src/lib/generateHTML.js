@@ -120,20 +120,18 @@ const generateHTML = (data) => {
       pageArray.push(engineerCard);
     }
 
-
     if (role === "Intern") {
       const internCard = renderIntern(employee);
       pageArray.push(internCard);
     }
   }
-
-}
+};
 
 const employeeCards = pageArray.join("");
 const renderTeam = renderTeamPage(employeeCards);
 return renderTeam;
 
-const renderTeamPage = (employeeCards) {
+const renderTeamPage = (employeeCards) => {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>

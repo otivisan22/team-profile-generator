@@ -3,9 +3,7 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const inquirer = require("inquirer");
-const generateHTML = require("./lib/generateHTML");
 const fs = require("fs");
-const generateHTML = require("./lib/generateHTML");
 
 const employees = [];
 
@@ -134,8 +132,6 @@ const addIntern = async () => {
 };
 
 const init = async () => {
-  await addManager();
-  //Questions
   while (!isTeam) {
     const employeeQuestions = [
       {
@@ -162,15 +158,17 @@ const init = async () => {
 
 //function to generate HTML
 
-const writeFile = data =>{
-  fs.writeFile("./dist/index.html", data, err{
+const writeToFile = (data) => {
+  const callback = (err) => {
     if (err) {
       console.log(err);
-      return;
-    }else{
-      console.log("Your team profie generator has been successfully created")
+    } else {
+      console.log("Generated Team Profile successfully");
     }
-  });
+  };
+
+  fs.writeFile("./dist/index.html", data, callback);
 };
+
 
 init();
