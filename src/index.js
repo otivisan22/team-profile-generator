@@ -6,6 +6,7 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 
 const employees = [];
+let isTeam = false;
 
 const validateInput = (userInput) => {
   if (userInput === "") {
@@ -46,13 +47,16 @@ const addManager = async () => {
     },
   ];
 
-  const managerAnswers = await inquirer.prompt(managerQuestion);
-  const manager = new Manager(managerAnswers);
+  const { name, id, officeNumber, email } = await inquirer.prompt(
+    managerQuestions
+  );
+
+  const manager = new Manager(name, id, email, officeNumber);
   employees.push(manager);
 };
 
 const addEngineer = async () => {
-  const engineerQuestion = [
+  const engineerQuestions = [
     {
       type: "input",
       name: "name",
@@ -76,21 +80,13 @@ const addEngineer = async () => {
 
     {
       type: "input",
-      name: "email",
-      message: "Please enter the engineer email",
-      validate: validateInput,
-    },
-
-    {
-      type: "input",
       name: "github",
       message: "Please enter the engineer github profile",
       validate: validateInput,
     },
   ];
-  const engineerAnswers = await inquirer.prompt(engineerQuestions);
-  console.log(engineerAnswers);
-  const engineer = new Engineer(engineerAnswers);
+  const { name, id, email, github } = await inquirer.prompt(engineerQuestions);
+  const engineer = new Engineer(name, id, email, github);
   employees.push(engineer);
 };
 
@@ -125,13 +121,16 @@ const addIntern = async () => {
     },
   ];
 
-  const internAnswers = await inquirer.prompt(internQuestions);
+  const { name, id, email, school } = await inquirer.prompt(internQuestions);
   console.log(internAnswers);
-  const intern = newIntern(internAnswers);
+  const intern = new Intern(name, id, email, school);
   employees.push(intern);
 };
 
 const init = async () => {
+  await addManager();
+  await addEngineer();
+  await addIntern();
   while (!isTeam) {
     const employeeQuestions = [
       {
@@ -146,15 +145,17 @@ const init = async () => {
       },
     ];
     const { employeeType } = await inquirer.prompt(employeeQuestions);
-    if (employeeType === none) {
+    if (employeeType === "none") {
       isTeam = true;
       console.log(employees);
     } else {
-      if (employeeType === engineer) await addEngineer();
+      if (employeeType === "engineer") await addEngineer();
     }
-    if (employeeType === intern) {
+    if (employeeType === "intern") {
       await addIntern();
     }
+  }
+};
 
 //function to generate HTML
 
@@ -169,6 +170,5 @@ const writeToFile = (data) => {
 
   fs.writeFile("./dist/index.html", data, callback);
 };
-
 
 init();
