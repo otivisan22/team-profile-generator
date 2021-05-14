@@ -6,6 +6,131 @@ const inquirer = require("inquirer");
 const generateHTML = require("./lib/generateHTML");
 
 const employees = [];
+let isTeam = false;
+
+const validateInput = (userInput) => {
+  if (userInput === "") {
+    return "the type of answer";
+  } else {
+    return true;
+  }
+};
+
+const addManager = async () => {
+  const managerQuestions = [
+    {
+      type: "input",
+      name: "name",
+      message: "Please enter the manager name",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "id",
+      message: "What's the id of your employee?",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "officeNumber",
+      message: "Please enter your office number",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "email",
+      message: "Please enter your work email",
+      validate: validateInput,
+    },
+  ];
+
+  const managerAnswers = await inquirer.prompt(managerQuestion);
+  const manager = new Manager(managerAnswers);
+  employees.push(manager);
+};
+
+const addEngineer = async () => {
+  const engineerQuestion = [
+    {
+      type: "input",
+      name: "name",
+      message: "Please enter the engineer name",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "id",
+      message: "Please enter the engineer id",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "email",
+      message: "Please enter the engineer email",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "email",
+      message: "Please enter the engineer email",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "github",
+      message: "Please enter the engineer github profile",
+      validate: validateInput,
+    },
+  ];
+  const engineerAnswers = await inquirer.prompt(engineerQuestions);
+  console.log(engineerAnswers);
+  const engineer = new Engineer(engineerAnswers);
+  employees.push(engineer);
+};
+
+const addIntern = async () => {
+  const internQuestions = [
+    {
+      type: "input",
+      name: "name",
+      message: "Please enter the intern name",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "id",
+      message: "Please enter the intern id",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "email",
+      message: "Please enter the intern email address",
+      validate: validateInput,
+    },
+
+    {
+      type: "input",
+      name: "school",
+      message: "Please enter the intern school name",
+      validate: validateInput,
+    },
+  ];
+
+  const internAnswers = await inquirer.prompt(internQuestions);
+  console.log(internAnswers);
+  const intern = newIntern(internAnswers);
+  employees.push(intern);
+};
 
 const init = async () => {
   await addManager();
@@ -43,122 +168,6 @@ const init = async () => {
       }
     });
   }
-
-  const addManager = async () => {
-    const managerQuestions = [
-      {
-        type: "input",
-        name: "name",
-        message: "Please enter the manager name",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "id",
-        message: "What's the id of your employee?",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "officeNumber",
-        message: "Please enter your office number",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "email",
-        message: "Please enter your work email",
-        validate: validateInput,
-      },
-    ];
-
-    const managerAnswers = await inquirer.prompt(managerQuestion);
-    const manager = new Manager(managerAnswers);
-    employees.push(manager);
-  };
-
-  const addEngineer = async () => {
-    const engineerQuestion = [
-      {
-        type: "input",
-        name: "name",
-        message: "Please enter the engineer name",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "id",
-        message: "Please enter the engineer id",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "email",
-        message: "Please enter the engineer email",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "email",
-        message: "Please enter the engineer email",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "github",
-        message: "Please enter the engineer github profile",
-        validate: validateInput,
-      },
-    ];
-    const engineerAnswers = await inquirer.prompt(engineerQuestions);
-    console.log(engineerAnswers);
-    const engineer = new Engineer(engineerAnswers);
-    employees.push(engineer);
-  };
-
-  const addIntern = async () => {
-    const internQuestions = [
-      {
-        type: "input",
-        name: "name",
-        message: "Please enter the intern name",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "id",
-        message: "Please enter the intern id",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "email",
-        message: "Please enter the intern email address",
-        validate: validateInput,
-      },
-
-      {
-        type: "input",
-        name: "school",
-        message: "Please enter the intern school name",
-        validate: validateInput,
-      },
-    ];
-
-    const internAnswers = await inquirer.prompt(internQuestions);
-    console.log(internAnswers);
-    const intern = newIntern(internAnswers);
-    employees.push(intern);
-  };
 };
 
 init();
