@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "start": "src/index.js",
+    "start": "node src/index.js",
     "test": "jest --verbose --coverage",
     "test:watch": "jest --verbose --watch"
   },
