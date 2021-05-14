@@ -4,6 +4,8 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const inquirer = require("inquirer");
 const generateHTML = require("./lib/generateHTML");
+const fs = require("fs");
+const generateHTML = require("./lib/generateHTML");
 
 const employees = [];
 let isTeam = false;
@@ -158,16 +160,6 @@ const init = async () => {
     if (employeeType === intern) {
       await addIntern();
     }
-    //create generateHTML function
-    const HTML = generateHTML(employees);
-    fs.writeFileSync("teamprofile.html", HTML, (err) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log("HTML file created");
-      }
-    });
-  }
-};
+
 
 init();
