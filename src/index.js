@@ -3,7 +3,7 @@ const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const inquirer = require("inquirer");
-const generateHTML = require("./lib/generateHTML")
+const generateHTML = require("./lib/generateHTML");
 
 const employees = [];
 
@@ -20,31 +20,29 @@ const init = async () => {
           { name: "Engineer", value: "engineer", short: "Engineer" },
           { name: "Intern", value: "intern", short: "Intern" },
           { name: "None", value: "none", short: "None" },
-        ]
+        ],
       },
-    ]
-    const { employeeType } = await inquirer.prompt(employeeQuestions)
+    ];
+    const { employeeType } = await inquirer.prompt(employeeQuestions);
     if (employeeType === none) {
       isTeam = true;
       console.log(employees);
     } else {
-      if (employeeType === engineer)
-        await addEngineer();
+      if (employeeType === engineer) await addEngineer();
     }
     if (employeeType === intern) {
       await addIntern();
-  
-    };
-     //create generateHTML function 
-  const HTML = generateHTML(employees);
-  fs.writeFileSync("teamprofile.html",HTML,(err) =>{
-    if (err) {
-      console.log(err);
-    }else{
-      console.log("HTML file created");
     }
-  });
-  };
+    //create generateHTML function
+    const HTML = generateHTML(employees);
+    fs.writeFileSync("teamprofile.html", HTML, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("HTML file created");
+      }
+    });
+  }
 
   const addManager = async () => {
     const managerQuestions = [
@@ -75,19 +73,15 @@ const init = async () => {
         message: "Please enter your work email",
         validate: validateInput,
       },
-
     ];
 
     const managerAnswers = await inquirer.prompt(managerQuestion);
     const manager = new Manager(managerAnswers);
     employees.push(manager);
-  }
-
-
+  };
 
   const addEngineer = async () => {
     const engineerQuestion = [
-
       {
         type: "input",
         name: "name",
@@ -122,15 +116,12 @@ const init = async () => {
         message: "Please enter the engineer github profile",
         validate: validateInput,
       },
-    ]
+    ];
     const engineerAnswers = await inquirer.prompt(engineerQuestions);
     console.log(engineerAnswers);
     const engineer = new Engineer(engineerAnswers);
     employees.push(engineer);
-
   };
-
-
 
   const addIntern = async () => {
     const internQuestions = [
@@ -168,5 +159,6 @@ const init = async () => {
     const intern = newIntern(internAnswers);
     employees.push(intern);
   };
+};
 
-  init();
+init();
