@@ -1,7 +1,7 @@
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
-const renderManagerCard = (manager) => {
+const renderManager = function (manager) => {
   return ` <div
   class="card m-2 shadow mb-5 bg-body rounded"
   style="width: 20rem; background-color: #ffffff !important"
@@ -35,7 +35,7 @@ const renderManagerCard = (manager) => {
 `;
 };
 
-const renderEngineerCard = (teamMember) => {
+const renderEngineer = function (engineer) => {
   return `<div
   class="card m-2 shadow mb-5 bg-body rounded"
   style="width: 20rem; background-color: #ffffff !important"
@@ -48,21 +48,21 @@ const renderEngineerCard = (teamMember) => {
   <h3 class="p-2">Engineer</h3>
 </div>
 <div class="card-body">
-  <h4 class="card-title text-center pb-3 pt-2">${teamMember.name}</h4>
+  <h4 class="card-title text-center pb-3 pt-2">${engineer.name}</h4>
   <ul class="list-group mx-3 mb-3">
     <li class="list-group-item fw-bold">
-      Employee ID: <span class="fw-normal">${teamMember.employeeID}</span>
+      Employee ID: <span class="fw-normal">${engineer.employeeID}</span>
     </li>
     <li class="list-group-item fw-bold">
       GitHub:
       <span class="fw-normal"
-        ><a href="https://www.github.com/${teamMember.github}">${teamMember.github}</a></span
+        ><a href="https://www.github.com/${engineer.github}">${engineer.github}</a></span
       >
     </li>
     <li class="list-group-item fw-bold">
       Email:
       <span class="fw-normal"
-        ><a href="mailto: ${teamMember.email}">${teamMember.email}</a></span
+        ><a href="mailto: ${engineer.email}">${engineer.email}</a></span
       >
     </li>
   </ul>
@@ -71,7 +71,7 @@ const renderEngineerCard = (teamMember) => {
 <div>`;
 };
 
-const renderInternCard = (teamMember) => {
+const renderIntern = function (intern) => {
   return `<div
   class="card m-2 shadow mb-5 bg-body rounded"
   style="width: 20rem; background-color: #ffffff !important"
@@ -84,18 +84,18 @@ const renderInternCard = (teamMember) => {
     <h3 class="p-2">Intern</h3>
   </div>
   <div class="card-body">
-    <h4 class="card-title text-center pb-3 pt-2">${teamMember.name}</h4>
+    <h4 class="card-title text-center pb-3 pt-2">${intern.name}</h4>
     <ul class="list-group mx-3 mb-3">
       <li class="list-group-item fw-bold">
-        Employee ID: <span class="fw-normal">${teamMember.id}</span>
+        Employee ID: <span class="fw-normal">${intern.id}</span>
       </li>
       <li class="list-group-item fw-bold">
-        School: <span class="fw-normal">${teamMember.school}</span>
+        School: <span class="fw-normal">${intern.school}</span>
       </li>
       <li class="list-group-item fw-bold">
         Email:
         <span class="fw-normal"
-          ><a href="mailto: ${teamMember.email}">${teamMember.email}</a></span
+          ><a href="mailto: ${intern.email}">${intern.email}</a></span
         >
       </li>
     </ul>
@@ -104,22 +104,36 @@ const renderInternCard = (teamMember) => {
 </div>`;
 };
 
-const generateHTML = (manager, teamMembers, teamName) => {
-  const managerCard = renderManagerCard(manager);
+const generateHTML = (data) => {
+  pageArray =[];
+  for(let i=0; i<data.length; i++){
+    const employee = data[i];
+    const role = employee.getRole;
 
-  const renderCard = teamMember;
-  if (teamMember instanceof Engineer) {
-    return renderEngineerCard(teamMember);
+    if (role==="Manager") {
+      const managerCard = renderManager(employee);
+      pageArray.push(managerCard);
+    }
+
+    if (role==="Engineer") {
+      const engineerCard = renderEngineer(employee);
+      pageArray.push(engineerCard);
+    }
+
+    
+    if (role==="Intern") {
+      const internCard = renderIntern(employee);
+      pageArray.push(internCard);
+    }
   }
 
-  if (teamMember instanceof Intern) {
-    return renderInternCard(teamMember);
-  }
-};
+}
 
-const teamCards = teamMembers.map(renderCard);
-cardString = managerCard + teamCards.join("");
+const employeeCards = pageArray.join("");
+const renderTeam = renderTeamPage(employeeCards);
+return renderTeam;
 
+const renderTeamPage = function(employeeCards){
 return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -143,12 +157,9 @@ return `<!DOCTYPE html>
     class="text-center p-4"
     style="background-color: #2848d8 !important"
   >
-    <h1><i class="fas fa-users px-4"></i>${teamName}</h1>
+    <h1><i class="fas fa-users px-4"></i>${employeeCards}</h1>
   </header>
   <div class="d-flex justify-content-around flex-wrap mt-5 m-3">
-
-  ${cardString}
-
   </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
@@ -158,5 +169,5 @@ return `<!DOCTYPE html>
   </body>
 </html>
 `;
-
+};
 module.exports = generateHTML;
