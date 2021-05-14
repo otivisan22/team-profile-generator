@@ -8,7 +8,6 @@ const fs = require("fs");
 const generateHTML = require("./lib/generateHTML");
 
 const employees = [];
-let isTeam = false;
 
 const validateInput = (userInput) => {
   if (userInput === "") {
@@ -161,5 +160,17 @@ const init = async () => {
       await addIntern();
     }
 
+//function to generate HTML
+
+const writeFile = data =>{
+  fs.writeFile("./dist/index.html", data, err{
+    if (err) {
+      console.log(err);
+      return;
+    }else{
+      console.log("Your team profie generator has been successfully created")
+    }
+  });
+};
 
 init();
