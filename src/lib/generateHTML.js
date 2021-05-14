@@ -1,7 +1,7 @@
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 
-const renderManager = function (manager) => {
+const renderManager = (manager) => {
   return ` <div
   class="card m-2 shadow mb-5 bg-body rounded"
   style="width: 20rem; background-color: #ffffff !important"
@@ -35,7 +35,7 @@ const renderManager = function (manager) => {
 `;
 };
 
-const renderEngineer = function (engineer) => {
+const renderEngineer = (engineer) => {
   return `<div
   class="card m-2 shadow mb-5 bg-body rounded"
   style="width: 20rem; background-color: #ffffff !important"
@@ -71,7 +71,7 @@ const renderEngineer = function (engineer) => {
 <div>`;
 };
 
-const renderIntern = function (intern) => {
+const renderIntern = (intern) => {
   return `<div
   class="card m-2 shadow mb-5 bg-body rounded"
   style="width: 20rem; background-color: #ffffff !important"
@@ -105,23 +105,23 @@ const renderIntern = function (intern) => {
 };
 
 const generateHTML = (data) => {
-  pageArray =[];
-  for(let i=0; i<data.length; i++){
+  pageArray = [];
+  for (let i = 0; i < data.length; i++) {
     const employee = data[i];
     const role = employee.getRole;
 
-    if (role==="Manager") {
+    if (role === "Manager") {
       const managerCard = renderManager(employee);
       pageArray.push(managerCard);
     }
 
-    if (role==="Engineer") {
+    if (role === "Engineer") {
       const engineerCard = renderEngineer(employee);
       pageArray.push(engineerCard);
     }
 
-    
-    if (role==="Intern") {
+
+    if (role === "Intern") {
       const internCard = renderIntern(employee);
       pageArray.push(internCard);
     }
@@ -133,8 +133,8 @@ const employeeCards = pageArray.join("");
 const renderTeam = renderTeamPage(employeeCards);
 return renderTeam;
 
-const renderTeamPage = function(employeeCards){
-return `<!DOCTYPE html>
+const renderTeamPage = (employeeCards) {
+  return `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -170,4 +170,5 @@ return `<!DOCTYPE html>
 </html>
 `;
 };
+
 module.exports = generateHTML;
