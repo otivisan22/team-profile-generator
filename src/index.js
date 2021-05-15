@@ -4,6 +4,7 @@ const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
 const inquirer = require("inquirer");
 const fs = require("fs");
+const generateHTML = require("./lib/generateHTML");
 
 const employees = [];
 let isTeam = false;
@@ -122,7 +123,6 @@ const addIntern = async () => {
   ];
 
   const { name, id, email, school } = await inquirer.prompt(internQuestions);
-  console.log(internAnswers);
   const intern = new Intern(name, id, email, school);
   employees.push(intern);
 };
@@ -169,6 +169,8 @@ const writeToFile = (data) => {
   };
 
   fs.writeFile("./dist/index.html", data, callback);
+
+  writeToFile(generateHTML);
 };
 
 init();

@@ -104,7 +104,7 @@ const renderIntern = (intern) => {
 </div>`;
 };
 
-const generateHTML = (data) => {
+const generateHTML = (manager, engineer, intern) => {
   pageArray = [];
   for (let i = 0; i < data.length; i++) {
     const employee = data[i];
