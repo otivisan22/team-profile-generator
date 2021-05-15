@@ -21,13 +21,7 @@ describe("Intern", () => {
     });
   });
   test("should return school when getSchool is called", () => {
-    const intern = new Intern(
-      "Sam",
-      222,
-      "sam22@gmail.com",
-      "https://github.com/samken22",
-      "Stavanger"
-    );
+    const intern = new Intern("Sam", 222, "sam22@gmail.com", "Stavanger");
     expect(intern.getSchool()).toEqual("Stavanger");
   });
 });
