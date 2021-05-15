@@ -51,9 +51,8 @@ const addManager = async () => {
   const { name, id, officeNumber, email } = await inquirer.prompt(
     managerQuestions
   );
-
   const manager = new Manager(name, id, email, officeNumber);
-  employees.push(manager);
+  return manager;
 };
 
 const addEngineer = async () => {
@@ -88,7 +87,7 @@ const addEngineer = async () => {
   ];
   const { name, id, email, github } = await inquirer.prompt(engineerQuestions);
   const engineer = new Engineer(name, id, email, github);
-  employees.push(engineer);
+  return engineer;
 };
 
 const addIntern = async () => {
@@ -124,37 +123,53 @@ const addIntern = async () => {
 
   const { name, id, email, school } = await inquirer.prompt(internQuestions);
   const intern = new Intern(name, id, email, school);
-  employees.push(intern);
+  return intern;
 };
 
 const init = async () => {
-  await addManager();
-  await addEngineer();
-  await addIntern();
+  const manager = await addManager();
+  const team = await createTeam();
+  const myTeam = [manager, ...team];
+  const HTMLMarkup = generateHTML(myTeam);
+  console.log(HTMLMarkup);
+  writeToFile(HTMLMarkup);
+};
+
+const createTeam = async () => {
+  let Team = [];
+  let isTeam = false;
   while (!isTeam) {
-    const employeeQuestions = [
-      {
-        type: "list",
-        name: "employeeType",
-        message: "What type of employee needs to be added?",
-        choices: [
-          { name: "Engineer", value: "engineer", short: "Engineer" },
-          { name: "Intern", value: "intern", short: "Intern" },
-          { name: "None", value: "none", short: "None" },
-        ],
-      },
-    ];
-    const { employeeType } = await inquirer.prompt(employeeQuestions);
+    const { employeeType } = await addTeamMembers();
     if (employeeType === "none") {
       isTeam = true;
-      console.log(employees);
     } else {
-      if (employeeType === "engineer") await addEngineer();
-    }
-    if (employeeType === "intern") {
-      await addIntern();
+      if (employeeType === "engineer") {
+        const engineer = await addEngineer();
+        Team.push(engineer);
+      }
+      if (employeeType === "intern") {
+        const intern = await addIntern();
+        Team.push(intern);
+      }
     }
   }
+  return Team;
+};
+const addTeamMembers = async () => {
+  const employeeQuestions = [
+    {
+      type: "list",
+      name: "employeeType",
+      message: "What type of employee needs to be added?",
+      choices: [
+        { name: "Engineer", value: "engineer", short: "Engineer" },
+        { name: "Intern", value: "intern", short: "Intern" },
+        { name: "None", value: "none", short: "None" },
+      ],
+    },
+  ];
+  const answers = await inquirer.prompt(employeeQuestions);
+  return answers;
 };
 
 //function to generate HTML
@@ -169,8 +184,6 @@ const writeToFile = (data) => {
   };
 
   fs.writeFile("./dist/index.html", data, callback);
-
-  writeToFile(generateHTML);
 };
 
 init();

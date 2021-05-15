@@ -1,5 +1,5 @@
-const Engineer = require("./lib/engineer");
-const Intern = require("./lib/intern");
+const Engineer = require("./engineer");
+const Intern = require("./intern");
 
 const renderManager = (manager) => {
   return ` <div
@@ -104,7 +104,7 @@ const renderIntern = (intern) => {
 </div>`;
 };
 
-const generateHTML = (manager, engineer, intern) => {
+const generateHTML = (data) => {
   pageArray = [];
   for (let i = 0; i < data.length; i++) {
     const employee = data[i];
@@ -125,11 +125,11 @@ const generateHTML = (manager, engineer, intern) => {
       pageArray.push(internCard);
     }
   }
-};
 
-const employeeCards = pageArray.join("");
-const renderTeam = renderTeamPage(employeeCards);
-return renderTeam;
+  const employeeCards = pageArray.join("");
+  const renderTeam = renderTeamPage(employeeCards);
+  return renderTeam;
+};
 
 const renderTeamPage = (employeeCards) => {
   return `<!DOCTYPE html>
