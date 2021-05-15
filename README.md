@@ -43,8 +43,8 @@ For development, you will only need Node.js and a node global package installed 
     $ npm run test:watch
     $ npm run tests
 
-![screenshot1](./src/images/employeetest.png)
-![screenshot2](./src/images/engineertest.png)
-![screenshot3](./src/images/interntest.png)
-![screenshot4](./src/images/managertest.png)
+![screenshot1](./src/images/employee.test.png)
+![screenshot2](./src/images/engineer.test.png)
+![screenshot3](./src/images/intern.test.png)
+![screenshot4](./src/images/manager.test.png)
 ![screenshot5](./src/images/test1.png)
