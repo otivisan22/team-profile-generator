@@ -4,8 +4,7 @@
 
 ## Description
 
-Our task was to build a readme generator in order to quickly create a readme generator for a new project.
-The readme generator will display the title of the project blended together with Description, Table of Contents, Installation, Usage, License, Contributing, Tests, and Questions. Firstly, the readme generator will display the tile of my project alongside with the description, installation instructions, usage, contributors, any test needed, questions. Secondly, when it comes to the licenses will render a list of licenses alongside with the badge of the license which will be added on top of the readme. Also, after entering the github username the readme generated should direct the user to the github link and after entering the email address the user will be directed to a section called questions for further additional information or questions.
+Our task was to build to build a Node.js command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person. Testing is key to making code maintainable, so also we needed to write a unit test for every part of our code and ensure that it passes each test.
 
 ---
 
