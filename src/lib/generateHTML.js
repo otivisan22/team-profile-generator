@@ -17,7 +17,7 @@ const renderManager = (manager) => {
   <h4 class="card-title text-center pb-3 pt-2">${manager.name}</h4>
   <ul class="list-group mx-3 mb-3">
     <li class="list-group-item fw-bold">
-      Employee ID: <span class="fw-normal">${manager.employeeID}</span>
+      Employee ID: <span class="fw-normal">${manager.id}</span>
     </li>
     <li class="list-group-item fw-bold">
       Office Number: <span class="fw-normal">${manager.officeNumber}</span>
@@ -31,7 +31,6 @@ const renderManager = (manager) => {
   </ul>
 </div>
 </div>
-<div>
 `;
 };
 
@@ -51,7 +50,7 @@ const renderEngineer = (engineer) => {
   <h4 class="card-title text-center pb-3 pt-2">${engineer.name}</h4>
   <ul class="list-group mx-3 mb-3">
     <li class="list-group-item fw-bold">
-      Employee ID: <span class="fw-normal">${engineer.employeeID}</span>
+      Employee ID: <span class="fw-normal">${engineer.id}</span>
     </li>
     <li class="list-group-item fw-bold">
       GitHub:
@@ -68,7 +67,7 @@ const renderEngineer = (engineer) => {
   </ul>
 </div>
 </div>
-<div>`;
+`;
 };
 
 const renderIntern = (intern) => {
@@ -108,7 +107,7 @@ const generateHTML = (data) => {
   pageArray = [];
   for (let i = 0; i < data.length; i++) {
     const employee = data[i];
-    const role = employee.getRole;
+    const role = employee.getRole();
 
     if (role === "Manager") {
       const managerCard = renderManager(employee);
@@ -155,9 +154,10 @@ const renderTeamPage = (employeeCards) => {
     class="text-center p-4"
     style="background-color: #2848d8 !important"
   >
-    <h1><i class="fas fa-users px-4"></i>${employeeCards}</h1>
+    <h1><i class="fas fa-users px-4"></i></h1>
   </header>
   <div class="d-flex justify-content-around flex-wrap mt-5 m-3">
+  ${employeeCards}
   </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
