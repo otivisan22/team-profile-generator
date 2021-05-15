@@ -25,11 +25,15 @@ For development, you will only need Node.js and a node global package installed 
 - Install npm i jest:watch
 - Install npm i jest
 - Install npm i inquirer
+- Developed the team profile generator by creating the employee, engineer, intern and manager classes and after tested all the classes with jest test
+- npm run test:watch for the first round of tests
+- all tests has been successful
 - Using inquirer we have generated/prompt the questions
-- Created a function to write ReadMe file
-- Created a function that returns a license badge based on which license is passed in
-- If there is no license return an empty string
-- Created a function to generate markdown for readme
+- Created the init function in order to start the app and render the questions and answers
+- Used w while loop in order to destructed the object that each team member needed to rendered
+- The html file which is rendering the team profile card can be seen
+
+  ![screenshot1](./src/images/cards.png)
 
 ## Running the project
 
@@ -39,3 +43,9 @@ For development, you will only need Node.js and a node global package installed 
 
     $ npm run test:watch
     $ npm run tests
+
+![screenshot1](./src/images/employeetest.png)
+![screenshot2](./src/images/engineertest.png)
+![screenshot3](./src/images/interntest.png)
+![screenshot4](./src/images/managertest.png)
+![screenshot5](./src/images/test1.png)
