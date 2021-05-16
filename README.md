@@ -1,6 +1,6 @@
 # TEAM-PROFILE-GENERATOR
 
-## Click [here](https://drive.google.com/file/d/1RT7uRCGHBfOVZU2XJFe_QtTTFuNgeiyh/view?usp=sharing) to watch my video recording
+## Click [here](https://drive.google.com/file/d/1ujDehf-DhhYYJ-NCk6ua67LvKgoQELbC/view) to watch my video recording
 
 ## Description
 
@@ -41,7 +41,7 @@ For development, you will only need Node.js and a node global package installed 
 ## Testing
 
     $ npm run test:watch
-    $ npm run tests
+    $ npm run test
 
 ![screenshot1](./src/images/employee.test.jpg)
 ![screenshot2](./src/images/engineer.test.jpg)
