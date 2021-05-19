@@ -6,16 +6,8 @@ const inquirer = require("inquirer");
 const fs = require("fs");
 const generateHTML = require("./lib/generateHTML");
 
-const employees = [];
-let isTeam = false;
-
-const validateInput = (userInput) => {
-  if (userInput === "") {
-    return "the type of answer";
-  } else {
-    return true;
-  }
-};
+const validateInput = (userInput) =>
+  userInput === "" ? "This field cannot be empty" : true;
 
 const addManager = async () => {
   const managerQuestions = [
@@ -51,7 +43,9 @@ const addManager = async () => {
   const { name, id, officeNumber, email } = await inquirer.prompt(
     managerQuestions
   );
+
   const manager = new Manager(name, id, email, officeNumber);
+
   return manager;
 };
 
@@ -85,8 +79,11 @@ const addEngineer = async () => {
       validate: validateInput,
     },
   ];
+
   const { name, id, email, github } = await inquirer.prompt(engineerQuestions);
+
   const engineer = new Engineer(name, id, email, github);
+
   return engineer;
 };
 
@@ -122,39 +119,12 @@ const addIntern = async () => {
   ];
 
   const { name, id, email, school } = await inquirer.prompt(internQuestions);
+
   const intern = new Intern(name, id, email, school);
+
   return intern;
 };
 
-const init = async () => {
-  const manager = await addManager();
-  const team = await createTeam();
-  const myTeam = [manager, ...team];
-  const HTMLMarkup = generateHTML(myTeam);
-  console.log(HTMLMarkup);
-  writeToFile(HTMLMarkup);
-};
-
-const createTeam = async () => {
-  let Team = [];
-  let isTeam = false;
-  while (!isTeam) {
-    const { employeeType } = await addTeamMembers();
-    if (employeeType === "none") {
-      isTeam = true;
-    } else {
-      if (employeeType === "engineer") {
-        const engineer = await addEngineer();
-        Team.push(engineer);
-      }
-      if (employeeType === "intern") {
-        const intern = await addIntern();
-        Team.push(intern);
-      }
-    }
-  }
-  return Team;
-};
 const addTeamMembers = async () => {
   const employeeQuestions = [
     {
@@ -168,22 +138,57 @@ const addTeamMembers = async () => {
       ],
     },
   ];
+
   const answers = await inquirer.prompt(employeeQuestions);
+
   return answers;
 };
 
-//function to generate HTML
+const createTeam = async () => {
+  let isTeamComplete = false;
+  const team = [];
+
+  while (!isTeamComplete) {
+    const { employeeType } = await addTeamMembers();
+    if (employeeType === "none") {
+      isTeamComplete = true;
+    } else {
+      if (employeeType === "engineer") {
+        const engineer = await addEngineer();
+        team.push(engineer);
+      }
+      if (employeeType === "intern") {
+        const intern = await addIntern();
+        team.push(intern);
+      }
+    }
+  }
+
+  return team;
+};
 
 const writeToFile = (data) => {
   const callback = (err) => {
     if (err) {
       console.log(err);
     } else {
-      console.log("Generated Team Profile successfully");
+      console.log("Generated team Profile successfully");
     }
   };
 
   fs.writeFile("./dist/index.html", data, callback);
+};
+
+const init = async () => {
+  const manager = await addManager();
+
+  const team = await createTeam();
+
+  const employees = [manager, ...team];
+
+  const htmlMarkup = generateHTML(employees);
+
+  writeToFile(htmlMarkup);
 };
 
 init();
