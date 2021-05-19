@@ -32,7 +32,7 @@ For development, you will only need Node.js and a node global package installed 
 - Used w while loop in order to destructed the object that each team member needed to rendered
 - The html file which is rendering the team profile card can be seen
 
-  ![screenshot1](./src/images/cards.png)
+  ![screenshot1](./screenshots/cards.png)
 
 ## Running the project
 
@@ -43,8 +43,8 @@ For development, you will only need Node.js and a node global package installed 
     $ npm run test:watch
     $ npm run test
 
-![screenshot1](./src/images/employee.test.jpg)
-![screenshot2](./src/images/engineer.test.jpg)
-![screenshot3](./src/images/intern.test.jpg)
-![screenshot4](./src/images/manager.test.jpg)
-![screenshot5](./src/images/test1.jpg)
+![screenshot1](./screenshots/employee.test.jpg)
+![screenshot2](./screenshots/engineer.test.jpg)
+![screenshot3](./screenshots/intern.test.jpg)
+![screenshot4](./screenshots/manager.test.jpg)
+![screenshot5](./screenshots/test1.jpg)
